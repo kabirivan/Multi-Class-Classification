@@ -25,3 +25,9 @@ X = dataset[:,0:4].astype(float)
 Y = dataset[:,4]
 
 
+# encode class values as integers
+encoder = LabelEncoder()
+encoder.fit(Y)
+encoded_Y = encoder.transform(Y)
+# convert integers to dummy variables (i.e. one hot encoded)
+dummy_y = np_utils.to_categorical(encoded_Y)
