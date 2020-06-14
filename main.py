@@ -16,3 +16,12 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import LabelEncoder
 from sklearn.pipeline import Pipeline
+
+
+
+dataframe = pandas.read_csv("data.csv", header=None)
+dataset = dataframe.values
+X = dataset[:,0:4].astype(float)
+Y = dataset[:,4]
+
+
