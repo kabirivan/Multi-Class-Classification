@@ -34,6 +34,21 @@ dummy_y = np_utils.to_categorical(encoded_Y)
 
 
 
+# create model
+# model = Sequential()
+# model.add(Dense(8, input_dim=4, activation='relu'))
+# model.add(Dense(3, activation='softmax'))
+# # Compile model
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# model.fit(X, dummy_y, batch_size = 10, epochs = 200, verbose = 0)
+
+# X_test = [5.1, 3.5, 1.4, 0.2]
+# y_pred = model.predict(X[25:75,:])
+
+
+
+# define baseline model
 def baseline_model():
 	# create model
 	model = Sequential()
@@ -45,5 +60,13 @@ def baseline_model():
 
 
 
-estimator = KerasClassifier(build_fn=baseline_model, epochs=200, batch_size=5, verbose=0)
+estimator = KerasClassifier(build_fn=baseline_model, epochs=100, batch_size=5, verbose=0)
 kfold = KFold(n_splits=10, shuffle=True)
+
+
+results = cross_val_score(estimator, X, dummy_y, cv=kfold)
+print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+
+
+
+y_pred = baseline_model.predict(X[25:75,:])
